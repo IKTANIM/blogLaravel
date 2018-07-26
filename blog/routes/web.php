@@ -11,4 +11,7 @@
 |
 */
 
-Route::get('/','BlogController@login')->name('login');
+Route::get('/signIn','BlogController@signIn')->name('signin');
+Route::get('/signUp','BlogController@signUp')->name('signup');
+Route::get('/home','BlogController@home')->name('home');
+Route::get('/postDetails','BlogController@postDetails')->name('postDetails');
