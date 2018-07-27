@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 use App\User;
 use App\Post;
 class BlogController extends Controller
@@ -49,22 +50,31 @@ class BlogController extends Controller
     }
     public function home()
     {   ////Post insert
-        $post= new Post;
-        $post->emailPost="mizbah";
-        $post->posttitle="tanvir";
-        $post->imgext="1";
-        $post->description="1";
-        $post->save();
-        return view('home');
+        // $post= new Post;
+        // $post->emailPost="tanvir";
+        // $post->postTitle="I am good at";
+        // $post->imgExt="1";
+        // $post->description="FGshdfk sdf";
+        // $post->save();
+        // $post=Post::orderBy('updated_at')->get();//old to new
+        $post=Post::latest('updated_at')->get();//new to old
+        // dd(str_limit($post->description,20)); string limit
+        //  dd($post[0]->user);
+        return view('home')->with('posts',$post);
     }
-    public function postDetails()
+    public function postDetails($id=1)
     {
         ////Post details
         // $post=Post::all();
         // dd($post);
-        $user=Post::find(1)->user;
-        dd($user);
-        return view('postDetails');
+        ////Finding the user of a post
+        // $user=Post::find(1)->user;
+        // dd($user);
+        // $user=Post::all();
+        // dd($user[0]->user);
+        // dd($id);
+        $post=Post::find($id);
+        return view('postDetails')->with('post',$post);
     }
     public function dashboard()
     {

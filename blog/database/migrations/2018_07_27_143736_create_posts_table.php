@@ -17,9 +17,9 @@ class CreatePostsTable extends Migration
             // $table->increments('id');
             $table->increments('Post_id');
             $table->string('emailPost');
-            $table->string('posttitle');
-            $table->string('description');
-            $table->string('imgext');
+            $table->string('postTitle');
+            $table->text('description');
+            $table->string('imgExt');
             $table->foreign('emailPost')->references('email')->on('users');//Foreign key
             $table->timestamps();
         });

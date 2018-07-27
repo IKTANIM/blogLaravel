@@ -65,13 +65,17 @@
             <!-- <img class="card-img-top" src="http://placehold.it/750x300" alt="Card image cap"> -->
             <div class="card-body">
               <h2 class="card-title">{{$post->postTitle}}</h2>
-            <p class="card-text"> {!! \Illuminate\Support\Str::words($post->description, 10,'....')  !!}</p> {{-- print the description limit to 10 words--}}
-           
-              <a href="{{route('postDetails')}}" class="btn btn-primary">Read More &rarr;</a>
+           {{-- <p class="card-text"> {!! \Illuminate\Support\Str::words($post->description, 10,'....')  !!}</p> {{-- print the description limit to 10 words--}}
+            <p class="card-text"> {!! \Illuminate\Support\Str::limit($post->description,$limit=150,'....')  !!}</p> {{-- print the description limit to string length  100 --}}           
+              <a href="{{route('postDetails',['post_id'=>$post->Post_id])}}" class="btn btn-primary">Read More &rarr;</a>
             </div>
             <div class="card-footer text-muted">
-              Posted on January 1, 2017 by
-              <a href="#">TANIM</a>
+              
+              {{-- Posted on {{$post->updated_at->format('d/m/Y')}} by --}}
+              {{-- Capital M means month --}}
+              Posted on {{$post->updated_at->format('M')}} {{ $post->updated_at->format('d') }}, {{ $post->updated_at->format('Y') }} by
+              {{-- Posted on January 1, 2017 by --}}
+              <a href="#">{{$post->user->name}}</a>
             </div>
           </div>
           @endforeach
