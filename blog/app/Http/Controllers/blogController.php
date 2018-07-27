@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\User;
+use App\Post;
 class BlogController extends Controller
 {
     public function signIn()
@@ -35,7 +36,11 @@ class BlogController extends Controller
         ////delete
         // $user=User::find('tanim');
         // $user->delete();
-        
+
+        //One user can have many posts
+        $post=User::find('tanvir');
+        dd($post->posts);
+
         return view('signup');
     }
     public function logout()
@@ -43,11 +48,22 @@ class BlogController extends Controller
         return view('home');
     }
     public function home()
-    {
+    {   ////Post insert
+        $post= new Post;
+        $post->emailPost="mizbah";
+        $post->posttitle="tanvir";
+        $post->imgext="1";
+        $post->description="1";
+        $post->save();
         return view('home');
     }
     public function postDetails()
     {
+        ////Post details
+        // $post=Post::all();
+        // dd($post);
+        $user=Post::find(1)->user;
+        dd($user);
         return view('postDetails');
     }
     public function dashboard()
