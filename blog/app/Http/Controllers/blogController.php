@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use App\User;
 use App\Post;
+use App\Comment;
 class BlogController extends Controller
 {
     public function signIn()
@@ -60,23 +61,29 @@ class BlogController extends Controller
 
         return view('signup');
     }
-    public function logout()
+    public function signOut(Request $request )
     {
-        return view('home');
+        $request->session()->flush(); 
+        return  redirect()->route('signin');
     }
-    public function home()
+    public function home(Request $request)
     {   ////Post insert
         // $post= new Post;
-        // $post->emailPost="tanvir";
-        // $post->postTitle="I am good at";
-        // $post->imgExt="1";
-        // $post->description="FGshdfk sdf";
+        // $post->emailPost="tanim";
+        // $post->postTitle="Life Lesson";
+        // $post->description="In your life you met new people. some are good and some bad.  Good people give all to you. Bad people take all from you.";
         // $post->save();
         // $post=Post::orderBy('updated_at')->get();//old to new
         $post=Post::latest('updated_at')->get();//new to old
         // dd(str_limit($post->description,20)); string limit
         //  dd($post[0]->user);
-        return view('home')->with('posts',$post);
+        //return view('home')->with('posts',$post);
+        if($request->session()->has('email')){
+            return view('home')->with('posts',$post);
+        }
+        else{
+            return view('publicHome')->with('posts',$post);   
+        }
     }
     public function postDetails(Request $request,$id)
     {
@@ -101,8 +108,17 @@ class BlogController extends Controller
     public function postDetailsPost(Request $request)
     {
         // $post=Post::find($id);
-        dd($request->all());
-        return view('postDetailsPublic')->with('post',$post);
+        // dd($request->all());
+        $user=User::find(session('email'));
+        $comment=new Comment;
+        $comment->post_id=$request->postId;
+        $comment->commentdData=$request->comment;
+        $comment->commentedUser=$user->name;
+        $comment->save();
+        $post=Post::find($request->postId);
+        dd($post->comments[0]);
+        //$post->comment=$post->comment->latest('updated_at')->get();
+        return view('postDetails')->with('post',$post);
     }
     public function dashboard()
     {

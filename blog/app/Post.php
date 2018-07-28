@@ -13,5 +13,13 @@ class Post extends Model
         //return $this->belongsTo('App\Post', 'foreign_key');
         // return $this->belongsTo('App\Post', 'foreign_key', 'other_key');
     }
+    public function comments()
+    {
+        return $this->hasMany('App\Comment','post_id','Post_id')->orderByDesc('updated_at');//One post have many comments
+        ////writing format
+        // return $this->hasMany('App\Comment', 'foreign_key');
+        // return $this->hasMany('App\Comment', 'foreign_key', 'local_key');
+    }
+
 
 }
