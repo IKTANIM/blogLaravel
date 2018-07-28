@@ -8,12 +8,14 @@
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
     <title>Home page</title>
+    {{-- <link rel="shortcut icon" href="logo.png" type="image/png" /> --}}
     <link rel="shortcut icon" href="logo.png" type="image/png" />
+
 
     <!-- Bootstrap core CSS -->
 
     <!-- Custom styles for this template -->
-    <link href="css/blog-home.css" rel="stylesheet">
+    <link href="/css/blog-home.css" rel="stylesheet">
 
   </head>
 
@@ -22,25 +24,28 @@
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
       <div class="container">
-        <a class="navbar-brand" href="#">IKT BLOG</a>
+        <a class="navbar-brand" href="{{route('home')}}">IKT BLOG</a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
         </button>
         <div class="collapse navbar-collapse" id="navbarResponsive">
           <ul class="navbar-nav ml-auto">
             <li class="nav-item active">
-              <a class="nav-link" href="#">Home
+              <a class="nav-link" href="{{route('home')}}">Home
                 <span class="sr-only">(current)</span>
               </a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{route('signin')}}">SignIn</a>
+              <a class="nav-link" href="{{route('dashboard')}}">Dashboard</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" href="{{route('signup')}}">SignUp</a>
+              <a class="nav-link" href="{{route('postCreate')}}">Create Post</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" href="#">Search</a>
+            </li>
+            <li class="nav-item">
+            <a class="nav-link" href="{{route('signOut')}}">Sign Out</a>
             </li>
           </ul>
         </div>
@@ -66,7 +71,7 @@
             <div class="card-body">
               <h2 class="card-title">{{$post->postTitle}}</h2>
            {{-- <p class="card-text"> {!! \Illuminate\Support\Str::words($post->description, 10,'....')  !!}</p> {{-- print the description limit to 10 words--}}
-            <p class="card-text"> {!! \Illuminate\Support\Str::limit($post->description,$limit=150,'....')  !!}</p> {{-- print the description limit to string length  100 --}}           
+            <p class="card-text"> {!! \Illuminate\Support\Str::limit($post->description,$limit=100,'....')  !!}</p> {{-- print the description limit to string length  100 --}}           
               <a href="{{route('postDetails',['post_id'=>$post->Post_id])}}" class="btn btn-primary">Read More &rarr;</a>
             </div>
             <div class="card-footer text-muted">
@@ -162,7 +167,7 @@
     <!-- Footer -->
     <footer class="py-5 bg-dark">
       <div class="container">
-        <p class="m-0 text-center text-white">Copyright &copy; <a href="">IKTblog.com</a> 2018</p>
+        <p class="m-0 text-center text-white">Copyright &copy; <a href="{{route('home')}}">IKTblog.com</a> 2018</p>
       </div>
       <!-- /.container -->
     </footer>

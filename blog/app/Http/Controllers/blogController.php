@@ -69,9 +69,9 @@ class BlogController extends Controller
     public function home(Request $request)
     {   ////Post insert
         // $post= new Post;
-        // $post->emailPost="tanim";
-        // $post->postTitle="Life Lesson";
-        // $post->description="In your life you met new people. some are good and some bad.  Good people give all to you. Bad people take all from you.";
+        // $post->emailPost="tanvir";
+        // $post->postTitle="Love football";
+        // $post->description="I love footbal. In your life you met new people. some are good and some bad.  Good people give all to you. Bad people take all from you.";
         // $post->save();
         // $post=Post::orderBy('updated_at')->get();//old to new
         $post=Post::latest('updated_at')->get();//new to old
@@ -116,12 +116,36 @@ class BlogController extends Controller
         $comment->commentedUser=$user->name;
         $comment->save();
         $post=Post::find($request->postId);
-        dd($post->comments[0]);
+        //dd($post->comments[0]);
         //$post->comment=$post->comment->latest('updated_at')->get();
         return view('postDetails')->with('post',$post);
     }
-    public function dashboard()
+    public function dashboard(Request $request)
     {
-        return view('dashboard');
+        if($request->session()->has('email')){
+            return view('dashboard');;
+        }else{
+            return  redirect()->route('signin');
+        }
+    }
+    public function postCreate(Request $request)
+    {
+        if($request->session()->has('email')){
+            return view('postCreate');
+        }else{
+            return  redirect()->route('signin');
+        }
+    }
+    public function postCreateStore(Request $request)
+    {
+        // dd($request->all());
+        $post=new Post;
+        $post->postTitle=$request->title;
+        $post->description=$request->description;
+        $post->emailPost=session('email');
+        $post->save();
+
+
+        return redirect()->route('home');
     }
 }

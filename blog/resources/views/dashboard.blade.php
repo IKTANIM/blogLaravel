@@ -9,15 +9,15 @@
   <meta name="author" content="">
 
   <title>Home page</title>
-  <link rel="shortcut icon" href="logo.png" type="image/png" />
+  <link rel="shortcut icon" href="/logo.png" type="image/png" />
 
   <!-- Bootstrap core CSS -->
-  <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <link href="/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 
   <!-- Custom styles for this template -->
-  <link href="css/blog-home.css" rel="stylesheet">
-  <link href="css/adminLte.css" rel="stylesheet">
-  <link href="css/font-awesome/css/font-awesome.css" rel="stylesheet">
+  <link href="/css/blog-home.css" rel="stylesheet">
+  <link href="/css/adminLte.css" rel="stylesheet">
+  <link href="/css/font-awesome/css/font-awesome.css" rel="stylesheet">
   <style>
     .customFotter {
       position: absolute;

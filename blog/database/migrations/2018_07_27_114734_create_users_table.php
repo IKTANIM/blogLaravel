@@ -18,6 +18,7 @@ class CreateUsersTable extends Migration
             $table->string('email')->primary();
             $table->string('name');
             $table->string('password');
+            $table->string('profilePic')->default('default.jpg');
         });
     }
 

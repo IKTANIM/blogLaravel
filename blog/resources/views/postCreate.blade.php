@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="/logo.png" type="image/png" />
     <style>
         .customFotter {
-            margin-bottom: 0%;
+            margin-bottom: 0px;
             left: 0;
             bottom: 0;
             width: 100%;
@@ -43,7 +43,7 @@
                         </a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{route('signin')}}">SignIn</a>
+                        <a class="nav-link" href="{{route('signOut')}}">Sign Out</a>
                     </li>
                 </ul>
             </div>
@@ -54,7 +54,7 @@
         <form class="form-horizontal" method="POST">
             <div class="form-group">
                 <label for="title" class="control-label col-sm-2">Title</label>
-                    <input type="text" class="form-control" name="title" placeholder="Enter your email address">
+                    <input type="text" class="form-control" name="title" placeholder="Enter title of the post">
             </div>
             <div class="form-group">
                 <label for="description" class="control-label col-sm-2">Description</label>
