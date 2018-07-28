@@ -11,13 +11,29 @@ class BlogController extends Controller
     public function signIn()
     {
         ////show all
-        $User= User::all();
-        dd($User);  
+        // $User= User::all();
+        // dd($User);  
         return view('signin');
     }
     public function signInPost(Request $request)
     {
-        return view('dashboard');
+        $user=User::find($request->email);
+        if($user){
+            if($request->email == $user->email && $request->password ==$user->password)
+            {
+                $request->session()->put('email', $request->email);
+                return redirect()->route('home');
+            }
+            else
+            {
+                $request->session()->flash('message', 'Invalid username or password');
+                return redirect()->route('signin');
+            }
+        }
+        else{
+            $request->session()->flash('message', 'Invalid username or password');
+            return redirect()->route('signin');
+        }
     }
     public function signUp()
     {
@@ -62,7 +78,7 @@ class BlogController extends Controller
         //  dd($post[0]->user);
         return view('home')->with('posts',$post);
     }
-    public function postDetails($id=1)
+    public function postDetails(Request $request,$id)
     {
         ////Post details
         // $post=Post::all();
@@ -74,7 +90,19 @@ class BlogController extends Controller
         // dd($user[0]->user);
         // dd($id);
         $post=Post::find($id);
-        return view('postDetails')->with('post',$post);
+        // dd($post->user);
+        if($request->session()->has('email')){
+            return view('postDetails')->with('post',$post);
+        }
+        else{
+            return view('postDetailsPublic')->with('post',$post);   
+        }
+    }
+    public function postDetailsPost(Request $request)
+    {
+        // $post=Post::find($id);
+        dd($request->all());
+        return view('postDetailsPublic')->with('post',$post);
     }
     public function dashboard()
     {

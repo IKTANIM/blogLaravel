@@ -88,13 +88,7 @@
           <div class="card my-4">
             <h5 class="card-header">Leave a Comment:</h5>
             <div class="card-body">
-              <form method="POST">
-                <div class="form-group">
-                  <textarea class="form-control" name="comment" rows="3"></textarea>
-                  <input type="hidden" name="postId" value="{{$post->Post_id}}" >
-                </div>
-                <button type="submit" class="btn btn-primary">Submit</button>
-              </form>
+                <a href="{{route('signin')}}" class="btn btn-primary">Please SignIn</a>
             </div>
           </div>
 

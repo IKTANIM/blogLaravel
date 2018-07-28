@@ -18,4 +18,5 @@ Route::get('/logout','BlogController@logout')->name('logout');
 Route::get('/dashboard','BlogController@dashboard')->name('dashboard');
 Route::get('/home','BlogController@home')->name('home');
 Route::get('/postDetails/{id}','BlogController@postDetails')->name('postDetails');
+Route::post('/postDetails/{id}','BlogController@postDetailsPost');
 

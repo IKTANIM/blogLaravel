@@ -53,17 +53,17 @@
     </nav>
     <div class="container" style="margin-top:5%;margin-left:28%;margin-right:10%">
         <h2>SignIn</h2>
-        <form class="form-horizontal" method="POST" action="#">
+        <form class="form-horizontal" method="POST" >
             <div class="form-group">
                 <label for="email" class="control-label col-sm-2">Email:</label>
                 <div class="col-sm-6">
-                    <input type="email" class="form-control" name="email" placeholder="Enter your email address">
+                    <input type="text" class="form-control" name="email" placeholder="Enter your email address" required>
                 </div>
             </div>
             <div class="form-group">
                 <label for="password" class="control-label col-sm-2">Password:</label>
                 <div class="col-sm-6">
-                    <input type="text" class="form-control" name="password" placeholder="Enter your password">
+                    <input type="text" class="form-control" name="password" placeholder="Enter your password" required>
                 </div>
             </div>
             <div class="form-group">
@@ -73,6 +73,9 @@
             </div>
 
         </form>
+        @if(session('message'))
+	    	{{session('message')}}
+	    @endif
     </div>
     <footer class="py-5 bg-dark customFotter">
         <div class="container">
